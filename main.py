@@ -6,11 +6,13 @@ coins = 0
 mult = 1
 auto = 0
 running = True
-multUPG = 10
-autoUPG = 100
 blue=(0,0,255)
 height = 600
 width = 800
+
+# Going to be used later for upgrades
+multUPG = 10
+autoUPG = 100
 
 pygame.init()
 wn = pygame.display.set_mode((width, height))
