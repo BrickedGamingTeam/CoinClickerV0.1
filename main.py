@@ -1,39 +1,46 @@
-import pygame, sys
-from pygame.locals import QUIT, K_a
+import pygame
+from pygame.locals import QUIT, K_a, K_SPACE, RESIZABLE, FULLSCREEN
 import sys
 
 coins = 0
 mult = 1
-auto = 0
 running = True
-multUPG = 10
-autoUPG = 100
-blue=(0,0,255)
-height = 600
-width = 800
+
+# setting the texts coordinates. Change before release.
+text1X = 683
+text1Y = 200
+text2X = 737
+text2Y = 200
 
 pygame.init()
-wn = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Cookie Game v0.1')
 
-font = pygame.font.Font('freesansbold.ttf', 32)
-x = 200
-y = 200
+# initializing the font.
+font = pygame.font.Font('freesansbold.ttf', 16)
+
+info = pygame.display.Info()
+white = (255, 255, 255)
+size = width, height = info.current_w, info.current_h
+print(width, height)
+
+# setting the screen up for size and setting up the caption
+screen = pygame.display.set_mode((size), RESIZABLE, FULLSCREEN)
+pygame.display.set_caption("Coin Clicker v0.1")
 
 while running:
-	for event in pygame.event.get():
-		if event.type == QUIT:
-			running = False
-			pygame.quit()
-			sys.exit()
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_a:
-				coins += 1*(mult)
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False
+            pygame.quit()
+            sys.exit()
 
-	wn.fill((255,255,255))
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_a:
+                coins += 1*(mult)
 
-	coinss = font.render("Coins: ", str(coins), 1)
-	coinRender = font.render(str(coins), 1, (0,0,0))
-	wn.blit(coinss, (x, y))
-	wn.blit(coinRender, (230,230))
-	pygame.display.flip()
+    screen.fill(white)
+
+    coinsText = font.render('Coins:', True, (0, 0, 0))
+    screen.blit(coinsText, (text1X, text1Y))
+    coinsValueRender = font.render(str(coins), True, (0, 0, 0))
+    screen.blit(coinsValueRender, (text2X, text2Y))
+    pygame.display.update()
